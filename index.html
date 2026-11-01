@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Đình Huy | Kỹ Sư Cơ Điện Tử & Robotics</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Custom Cyber Cursor -->
+    <div class="cyber-cursor-dot" id="cursorDot"></div>
+    <div class="cyber-cursor-ring" id="cursorRing">
+        <span class="notch notch-t"></span>
+        <span class="notch notch-b"></span>
+        <span class="notch notch-l"></span>
+        <span class="notch notch-r"></span>
+    </div>
+
+    <!-- Immersive Background Image with Parallax -->
+    <div class="site-bg" id="siteBg"></div>
+    <div class="bg-spotlight" id="bgSpotlight"></div>
+
+    <!-- Interactive Energy & Particle Canvas -->
+    <canvas id="techCanvas" class="tech-canvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-accent">[⚡</span>HUY.MEC<span class="logo-accent">]</span>
+            </a>
+            <nav class="nav-links" id="navLinks">
+                <a href="#about" class="nav-item">Về tôi</a>
+                <a href="#skills" class="nav-item">Kỹ năng</a>
+                <a href="#projects" class="nav-item">Dự án</a>
+                <a href="#contact" class="nav-item">Liên hệ</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="cv-nav-links">
+                    <a href="Personal%20Information/CV_Vietnamese_version.pdf" target="_blank" class="nav-cv-btn" title="Tải CV Tiếng Việt">
+                        <i class="fa-solid fa-file-pdf"></i> CV (VN)
+                    </a>
+                    <a href="Personal%20Information/CV_English_version.pdf" target="_blank" class="nav-cv-btn outline" title="Download English CV">
+                        <i class="fa-solid fa-file-pdf"></i> CV (EN)
+                    </a>
+                </div>
+                <button id="themeToggle" class="icon-btn" title="Chuyển chế độ sáng/tối">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button id="mobileMenuBtn" class="mobile-toggle icon-btn" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <div class="hero-container">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span> [SYS: ONLINE] Kỹ Sư Cơ Điện Tử & Robotics
+                </div>
+                <h1 class="hero-title">
+                    Xin chào, mình là <span class="gradient-text" id="userName">Nguyễn Đình Huy</span> ⚡
+                </h1>
+                <p class="hero-subtitle">
+                    Kỹ sư Cơ điện tử tốt nghiệp Đại học Bách khoa TP.HCM. Chuyên sâu về <strong>Thiết kế Cơ khí R&D</strong>, <strong>Tự động hóa</strong> và <strong>Tích hợp hệ thống Robotics/AMR</strong>.
+                </p>
+
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fa-solid fa-robot"></i> Xem dự án
+                    </a>
+                    <a href="Personal%20Information/CV_Vietnamese_version.pdf" target="_blank" class="btn btn-cv">
+                        <i class="fa-solid fa-file-pdf"></i> Tải CV (Tiếng Việt)
+                    </a>
+                    <a href="Personal%20Information/CV_English_version.pdf" target="_blank" class="btn btn-secondary">
+                        <i class="fa-solid fa-file-arrow-down"></i> CV (English)
+                    </a>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com" target="_blank" rel="noopener" class="social-icon" title="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-icon" title="LinkedIn">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="tel:0385221158" class="social-icon" title="Điện thoại: 0385 221 158">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                    <a href="mailto:dinhhuy76.mechatronics@gmail.com" class="social-icon" title="Email: dinhhuy76.mechatronics@gmail.com">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section about-section" id="about">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Về Tôi</h2>
+                    <p class="section-desc">Hành trình nghiên cứu, chế tạo và định hướng chuyên môn Cơ Điện Tử</p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-card avatar-card">
+                        <div class="avatar-wrapper">
+                            <img src="Personal%20Information/AVT%20porfolio.jpg" alt="Nguyễn Đình Huy - Kỹ Sư Cơ Điện Tử" class="avatar-img" id="userAvatar">
+                            <div class="avatar-glow-ring"></div>
+                        </div>
+                        <h3 class="avatar-name">Nguyễn Đình Huy</h3>
+                        <p class="avatar-role">Kỹ Sư Cơ Điện Tử & Robotics</p>
+                    </div>
+
+                    <div class="about-card bio-card">
+                        <h3>Kỹ Sư Cơ Điện Tử & R&D Robotics</h3>
+                        <p>
+                            Kỹ sư Cơ điện tử tốt nghiệp Đại học Bách khoa TP.HCM, có nền tảng về thiết kế cơ khí, hệ thống điện – điều khiển và tích hợp hệ thống cơ điện tử. Có khả năng dựng mô hình 3D, triển khai bản vẽ kỹ thuật, lựa chọn linh kiện và xây dựng nguyên lý hoạt động cho máy móc, thiết bị. Đã thực hiện các dự án học thuật và cá nhân trong lĩnh vực cơ điện tử. Mong muốn phát triển chuyên môn trong lĩnh vực Thiết kế Cơ khí R&D, Tự động hóa và Tích hợp hệ thống Robotics/AMR.
+                        </p>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number">12+</span>
+                                <span class="stat-label">Hệ thống & Đồ án</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Tối ưu cơ - điện - code</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">24/7</span>
+                                <span class="stat-label">Nghiên cứu & Sáng tạo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section skills-section" id="skills">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Kỹ Năng Kỹ Thuật</h2>
+                    <p class="section-desc">Các nền tảng phần cứng, phần mềm và công nghệ cốt lõi</p>
+                </div>
+
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <i class="fa-solid fa-microchip skill-icon chip"></i>
+                        <h4>Vi điều khiển & Nhúng</h4>
+                        <p>Lập trình C/C++, STM32, ESP32, Arduino, FreeRTOS, giao thức UART, SPI, I2C, CAN Bus.</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fa-solid fa-cube skill-icon cad"></i>
+                        <h4>Thiết kế Cơ khí & 3D CAD</h4>
+                        <p>SolidWorks, Autodesk Inventor, mô hình hóa 3D chi tiết cơ khí và mô phỏng động học.</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fa-solid fa-bolt-lightning skill-icon pcb"></i>
+                        <h4>Mạch Điện Tử & PCB</h4>
+                        <p>Thiết kế mạch nguyên lý Schematic & layout PCB nhiều lớp với Altium Designer, Proteus.</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fa-solid fa-gears skill-icon plc"></i>
+                        <h4>Tự Động Hóa & PLC</h4>
+                        <p>Lập trình PLC Siemens S7-1200 / Mitsubishi, thiết kế giao diện HMI & giám sát SCADA xưởng.</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fa-solid fa-robot skill-icon robot"></i>
+                        <h4>Robotics & ROS</h4>
+                        <p>Động học ngược Inverse Kinematics, hệ điều hành Robot ROS2, thuật toán điều khiển PID/LQR.</p>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fa-solid fa-network-wired skill-icon code"></i>
+                        <h4>IoT & Xử Lý Ảnh (AI)</h4>
+                        <p>Python, OpenCV nhận diện thị giác máy tính, truyền thông MQTT Broker & Web Dashboard.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section projects-section" id="projects">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Dự Án Tiêu Biểu</h2>
+                    <p class="section-desc">Những mô hình robot, thiết bị cơ điện tử và tự động hóa thực tế</p>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <div class="project-img-box">
+                            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=700&q=80" alt="Cánh tay robot" class="project-img">
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span class="tag">STM32F4</span>
+                                <span class="tag">SolidWorks</span>
+                                <span class="tag">Kinematics</span>
+                                <span class="tag">PID</span>
+                            </div>
+                            <h3 class="project-title">Cánh Tay Robot 4 Bậc Tự Do (4-DOF)</h3>
+                            <p class="project-description">
+                                Thiết kế kết cấu 3D, gia công cơ khí và lập trình thuật toán động học nghịch Inverse Kinematics điều khiển cánh tay gắp thả linh kiện chính xác.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" class="btn-link"><i class="fa-solid fa-video"></i> Video mô phỏng</a>
+                                <a href="#" class="btn-link secondary"><i class="fa-brands fa-github"></i> Mã nguồn & CAD</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <div class="project-img-box">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&q=80" alt="AMR Robot" class="project-img">
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span class="tag">ROS2</span>
+                                <span class="tag">LiDAR 2D</span>
+                                <span class="tag">ESP32</span>
+                                <span class="tag">SLAM</span>
+                            </div>
+                            <h3 class="project-title">Xe Tự Hành Vận Chuyển AMR / AGV</h3>
+                            <p class="project-description">
+                                Robot tự hành đa hướng vận chuyển kho thông minh tích hợp cảm biến LiDAR quét 2D SLAM, định vị và né vật cản thời gian thực.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" class="btn-link"><i class="fa-solid fa-video"></i> Video mô phỏng</a>
+                                <a href="#" class="btn-link secondary"><i class="fa-brands fa-github"></i> Mã nguồn & CAD</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <div class="project-img-box">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=700&q=80" alt="Sorting Line" class="project-img">
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span class="tag">Siemens S7-1200</span>
+                                <span class="tag">OpenCV</span>
+                                <span class="tag">TIA Portal</span>
+                                <span class="tag">SCADA</span>
+                            </div>
+                            <h3 class="project-title">Dây Chuyền Phân Loại Sản Phẩm Thông Minh</h3>
+                            <p class="project-description">
+                                Hệ thống băng tải công nghiệp kết hợp camera xử lý ảnh thị giác máy tính nhận diện sản phẩm lỗi, điều khiển xylanh khí nén và giám sát qua Web SCADA.
+                            </p>
+                            <div class="project-links">
+                                <a href="#" class="btn-link"><i class="fa-solid fa-video"></i> Video mô phỏng</a>
+                                <a href="#" class="btn-link secondary"><i class="fa-brands fa-github"></i> Mã nguồn & CAD</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section contact-section" id="contact">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Liên Hệ & Hợp Tác</h2>
+                    <p class="section-desc">Bạn có ý tưởng dự án cơ điện tử, robot hoặc tự động hóa? Hãy gửi tin nhắn cho mình nhé!</p>
+                </div>
+
+                <div class="contact-box">
+                    <div class="contact-info">
+                        <h3>Thông tin kết nối</h3>
+                        <p>Sẵn sàng trao đổi về nghiên cứu chế tạo, đồ án chuyên ngành và cơ hội hợp tác thực tế:</p>
+                        
+                        <div class="contact-items">
+                            <div class="contact-item" onclick="copyText('dinhhuy76.mechatronics@gmail.com', 'Đã sao chép email!')">
+                                <div class="item-icon"><i class="fa-solid fa-envelope"></i></div>
+                                <div>
+                                    <span class="label">Email</span>
+                                    <span class="val">dinhhuy76.mechatronics@gmail.com</span>
+                                </div>
+                            </div>
+                            <div class="contact-item" onclick="copyText('0385221158', 'Đã sao chép số điện thoại!')">
+                                <div class="item-icon"><i class="fa-solid fa-phone"></i></div>
+                                <div>
+                                    <span class="label">Số điện thoại</span>
+                                    <span class="val">0385 221 158</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="item-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <div>
+                                    <span class="label">Địa điểm</span>
+                                    <span class="val">TP. Hồ Chí Minh, Việt Nam</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Tên của bạn</label>
+                            <input type="text" id="name" placeholder="Họ và tên..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Địa chỉ Email</label>
+                            <input type="email" id="email" placeholder="email@cuaban.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Nội dung tin nhắn</label>
+                            <textarea id="message" rows="4" placeholder="Xin chào, mình muốn trao đổi về dự án cơ điện tử / robotics..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fa-regular fa-paper-plane"></i> Gửi Tin Nhắn
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© <span id="year"></span> Được thiết kế với tinh thần Kỹ Thuật Cơ Điện Tử. Tối ưu & Tốc độ cao.</p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
