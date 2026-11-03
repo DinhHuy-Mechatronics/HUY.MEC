@@ -224,12 +224,75 @@ function copyText(text, successMsg) {
     });
 }
 
-// Contact form simulation
-function handleFormSubmit(e) {
+// EmailJS public configuration.
+const EMAILJS_CONFIG = {
+    SERVICE_ID: 'service_7aeu4fa',
+    TEMPLATE_ID: 'template_a693aqg',
+    PUBLIC_KEY: 'WMR1ZcZLGTJGKMGjV'
+};
+
+// Contact form submission
+async function handleFormSubmit(e) {
     e.preventDefault();
-    const name = document.getElementById('name').value;
-    showToast(`Cảm ơn ${name}! Lời nhắn đã được gửi thành công.`);
-    e.target.reset();
+
+    const form = e.currentTarget;
+    if (!(form instanceof HTMLFormElement) || form.dataset.submitting === 'true') return;
+
+    if (!form.reportValidity()) return;
+
+    const nameField = form.querySelector('[name="user_name"]');
+    const emailField = form.querySelector('[name="user_email"]');
+    const messageField = form.querySelector('[name="message"]');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    if (!nameField || !emailField || !messageField || !(submitButton instanceof HTMLButtonElement)) {
+        showToast('Không thể gửi tin nhắn lúc này. Vui lòng tải lại trang và thử lại.');
+        return;
+    }
+
+    if (!nameField.value.trim() || !emailField.value.trim() || !messageField.value.trim()) {
+        showToast('Vui lòng điền đầy đủ tên, email và nội dung tin nhắn.');
+        return;
+    }
+
+    if (!EMAILJS_CONFIG.SERVICE_ID || !EMAILJS_CONFIG.TEMPLATE_ID || !EMAILJS_CONFIG.PUBLIC_KEY) {
+        showToast('Form liên hệ chưa được cấu hình. Vui lòng thử lại sau.');
+        return;
+    }
+
+    if (typeof emailjs === 'undefined' || typeof emailjs.sendForm !== 'function') {
+        showToast('Không tải được dịch vụ gửi email. Vui lòng thử lại sau.');
+        return;
+    }
+
+    const originalButtonContent = submitButton.innerHTML;
+    const wasDisabled = submitButton.disabled;
+    form.dataset.submitting = 'true';
+    submitButton.disabled = true;
+    submitButton.setAttribute('aria-busy', 'true');
+    submitButton.textContent = 'Đang gửi...';
+
+    try {
+        const response = await emailjs.sendForm(
+            EMAILJS_CONFIG.SERVICE_ID,
+            EMAILJS_CONFIG.TEMPLATE_ID,
+            form,
+            { publicKey: EMAILJS_CONFIG.PUBLIC_KEY }
+        );
+        if (response.status !== 200) {
+            throw new Error(`Unexpected EmailJS response status: ${response.status}`);
+        }
+        showToast(`Cảm ơn ${nameField.value.trim()}! Tin nhắn đã được gửi thành công.`);
+        form.reset();
+    } catch (error) {
+        console.error('EmailJS contact form submission failed:', error);
+        showToast('Gửi tin nhắn thất bại. Vui lòng thử lại sau.');
+    } finally {
+        submitButton.innerHTML = originalButtonContent;
+        submitButton.disabled = wasDisabled;
+        submitButton.removeAttribute('aria-busy');
+        delete form.dataset.submitting;
+    }
 }
 
 /* ============================================================
