@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Chi tiết dự án dây chuyền phân loại thông minh kết hợp PLC, xử lý ảnh và giám sát SCADA.">
+    <title>Dây Chuyền Phân Loại Thông Minh | Nguyễn Đình Huy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="cyber-cursor-dot" id="cursorDot"></div>
+    <div class="cyber-cursor-ring" id="cursorRing">
+        <span class="notch notch-t"></span>
+        <span class="notch notch-b"></span>
+        <span class="notch notch-l"></span>
+        <span class="notch notch-r"></span>
+    </div>
+    <div class="site-bg" id="siteBg"></div>
+    <div class="bg-spotlight" id="bgSpotlight"></div>
+    <canvas id="techCanvas" class="tech-canvas"></canvas>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><span class="logo-accent">[⚡</span>HUY.WS<span
+                    class="logo-accent">]</span></a>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html#about" class="nav-item">Về tôi</a>
+                <a href="index.html#skills" class="nav-item">Kỹ năng</a>
+                <a href="index.html#projects" class="nav-item">Dự án</a>
+                <a href="index.html#contact" class="nav-item">Liên hệ</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="cv-nav-links">
+                    <a href="Personal%20Information/CV_Vietnamese_version.pdf" target="_blank" rel="noopener"
+                        class="nav-cv-btn"><i class="fa-solid fa-file-pdf"></i> CV (VN)</a>
+                </div>
+                <button id="themeToggle" class="icon-btn" type="button" title="Chuyển chế độ sáng/tối"
+                    aria-label="Chuyển chế độ sáng/tối"><i class="fa-solid fa-moon"></i></button>
+                <button id="mobileMenuBtn" class="mobile-toggle icon-btn" type="button" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="project-detail-section">
+        <div class="project-detail-container">
+            <div class="project-breadcrumb">
+                <a class="project-back-link" href="index.html#projects">
+                    <i class="fa-solid fa-arrow-left"></i> Quay lại dự án
+                </a>
+            </div>
+
+            <section class="project-detail-hero" aria-labelledby="projectTitle">
+                <div class="project-detail-copy">
+                    <p class="project-detail-eyebrow">Dự án Tự động hóa công nghiệp</p>
+                    <h1 class="project-detail-title" id="projectTitle">Dây Chuyền Phân Loại Sản Phẩm Thông Minh</h1>
+                    <p class="project-detail-summary">
+                        Băng tải phân loại kết hợp camera và xử lý ảnh để nhận diện sản phẩm, PLC điều khiển cơ cấu
+                        chấp hành và giao diện SCADA giám sát hệ thống.
+                    </p>
+                    <div class="project-detail-tags" aria-label="Công nghệ sử dụng">
+                        <span class="tag">Siemens S7-1200</span>
+                        <span class="tag">OpenCV</span>
+                        <span class="tag">TIA Portal</span>
+                        <span class="tag">SCADA</span>
+                    </div>
+                    <div class="project-detail-actions">
+                        <a class="btn btn-primary"
+                            href="mailto:dinhhuy76.mechatronics@gmail.com?subject=Trao%20%C4%91%E1%BB%95i%20v%E1%BB%81%20d%C3%A2y%20chuy%E1%BB%81n%20ph%C3%A2n%20lo%E1%BA%A1i">
+                            <i class="fa-regular fa-envelope"></i> Trao đổi về dự án
+                        </a>
+                        <a class="btn btn-secondary" href="index.html#projects">Các dự án khác</a>
+                    </div>
+                </div>
+                <img class="project-detail-image"
+                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85"
+                    alt="Hình minh họa hệ thống tự động hóa công nghiệp">
+            </section>
+
+            <div class="project-detail-content">
+                <section class="project-detail-card">
+                    <h2>Tổng quan</h2>
+                    <p>
+                        Dây chuyền sử dụng băng tải để đưa sản phẩm qua khu vực camera. OpenCV hỗ trợ xử lý ảnh và
+                        nhận diện sản phẩm lỗi; PLC điều khiển xylanh khí nén để thực hiện thao tác phân loại.
+                    </p>
+                    <p>
+                        Hệ thống giám sát SCADA cung cấp giao diện theo dõi hoạt động. Các thành phần chính được nêu
+                        trong dự án gồm Siemens S7-1200, TIA Portal, OpenCV và SCADA.
+                    </p>
+                </section>
+                <aside class="project-detail-card">
+                    <h2>Điểm nhấn kỹ thuật</h2>
+                    <ul class="project-detail-list">
+                        <li><i class="fa-solid fa-check"></i><span>Nhận diện sản phẩm bằng camera và OpenCV</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Điều khiển PLC Siemens S7-1200</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Phân loại bằng cơ cấu xylanh khí nén</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Giám sát hoạt động qua giao diện SCADA</span></li>
+                    </ul>
+                </aside>
+            </div>
+
+            <section class="project-detail-footer">
+                <p>Bạn muốn trao đổi thêm về hệ thống PLC hoặc xử lý ảnh công nghiệp?</p>
+                <a class="btn btn-primary" href="mailto:dinhhuy76.mechatronics@gmail.com">
+                    <i class="fa-regular fa-paper-plane"></i> Liên hệ
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© <span id="year"></span> Nguyễn Đình Huy | Kỹ Sư Cơ Điện Tử & Robotics</p>
+    </footer>
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>

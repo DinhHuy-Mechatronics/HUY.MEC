@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Chi tiết dự án cánh tay robot 4 bậc tự do: thiết kế cơ khí, động học nghịch và điều khiển PID.">
+    <title>Cánh Tay Robot 4-DOF | Nguyễn Đình Huy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="cyber-cursor-dot" id="cursorDot"></div>
+    <div class="cyber-cursor-ring" id="cursorRing">
+        <span class="notch notch-t"></span>
+        <span class="notch notch-b"></span>
+        <span class="notch notch-l"></span>
+        <span class="notch notch-r"></span>
+    </div>
+    <div class="site-bg" id="siteBg"></div>
+    <div class="bg-spotlight" id="bgSpotlight"></div>
+    <canvas id="techCanvas" class="tech-canvas"></canvas>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><span class="logo-accent">[⚡</span>HUY.WS<span
+                    class="logo-accent">]</span></a>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html#about" class="nav-item">Về tôi</a>
+                <a href="index.html#skills" class="nav-item">Kỹ năng</a>
+                <a href="index.html#projects" class="nav-item">Dự án</a>
+                <a href="index.html#contact" class="nav-item">Liên hệ</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="cv-nav-links">
+                    <a href="Personal%20Information/CV_Vietnamese_version.pdf" target="_blank" rel="noopener"
+                        class="nav-cv-btn"><i class="fa-solid fa-file-pdf"></i> CV (VN)</a>
+                </div>
+                <button id="themeToggle" class="icon-btn" type="button" title="Chuyển chế độ sáng/tối"
+                    aria-label="Chuyển chế độ sáng/tối"><i class="fa-solid fa-moon"></i></button>
+                <button id="mobileMenuBtn" class="mobile-toggle icon-btn" type="button" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="project-detail-section">
+        <div class="project-detail-container">
+            <div class="project-breadcrumb">
+                <a class="project-back-link" href="index.html#projects">
+                    <i class="fa-solid fa-arrow-left"></i> Quay lại dự án
+                </a>
+            </div>
+
+            <section class="project-detail-hero" aria-labelledby="projectTitle">
+                <div class="project-detail-copy">
+                    <p class="project-detail-eyebrow">Dự án Robotics</p>
+                    <h1 class="project-detail-title" id="projectTitle">Cánh Tay Robot 4 Bậc Tự Do</h1>
+                    <p class="project-detail-summary">
+                        Thiết kế kết cấu 3D, gia công cơ khí và ứng dụng động học nghịch để điều khiển cánh tay robot
+                        gắp thả linh kiện.
+                    </p>
+                    <div class="project-detail-tags" aria-label="Công nghệ sử dụng">
+                        <span class="tag">STM32F4</span>
+                        <span class="tag">SolidWorks</span>
+                        <span class="tag">Kinematics</span>
+                        <span class="tag">PID</span>
+                    </div>
+                    <div class="project-detail-actions">
+                        <a class="btn btn-primary"
+                            href="mailto:dinhhuy76.mechatronics@gmail.com?subject=Trao%20%C4%91%E1%BB%95i%20v%E1%BB%81%20d%E1%BB%B1%20%C3%A1n%20c%C3%A1nh%20tay%20robot">
+                            <i class="fa-regular fa-envelope"></i> Trao đổi về dự án
+                        </a>
+                        <a class="btn btn-secondary" href="index.html#projects">Các dự án khác</a>
+                    </div>
+                </div>
+                <img class="project-detail-image"
+                    src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=85"
+                    alt="Hình minh họa cánh tay robot">
+            </section>
+
+            <div class="project-detail-content">
+                <section class="project-detail-card">
+                    <h2>Tổng quan</h2>
+                    <p>
+                        Dự án tập trung vào một cánh tay robot 4 bậc tự do phục vụ thao tác gắp và đặt linh kiện.
+                        Thiết kế cơ khí 3D là nền tảng để bố trí các khớp và kiểm tra chuyển động trước khi triển khai.
+                    </p>
+                    <p>
+                        Phần điều khiển kết hợp động học nghịch (Inverse Kinematics) để xác định chuyển động khớp từ
+                        vị trí đầu gắp mong muốn, cùng PID để điều khiển chuyển động.
+                    </p>
+                </section>
+                <aside class="project-detail-card">
+                    <h2>Điểm nhấn kỹ thuật</h2>
+                    <ul class="project-detail-list">
+                        <li><i class="fa-solid fa-check"></i><span>Kết cấu và mô hình 3D bằng SolidWorks</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Động học nghịch cho cơ cấu 4 bậc tự do</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Điều khiển trên nền tảng STM32F4 và PID</span></li>
+                    </ul>
+                </aside>
+            </div>
+
+            <section class="project-detail-footer">
+                <p>Bạn muốn trao đổi thêm về thiết kế hoặc điều khiển robot?</p>
+                <a class="btn btn-primary" href="mailto:dinhhuy76.mechatronics@gmail.com">
+                    <i class="fa-regular fa-paper-plane"></i> Liên hệ
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© <span id="year"></span> Nguyễn Đình Huy | Kỹ Sư Cơ Điện Tử & Robotics</p>
+    </footer>
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>

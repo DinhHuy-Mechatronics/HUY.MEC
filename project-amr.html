@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Chi tiết dự án robot tự hành AMR/AGV với ROS2, LiDAR, SLAM và khả năng vận chuyển trong kho.">
+    <title>Xe Tự Hành AMR / AGV | Nguyễn Đình Huy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="cyber-cursor-dot" id="cursorDot"></div>
+    <div class="cyber-cursor-ring" id="cursorRing">
+        <span class="notch notch-t"></span>
+        <span class="notch notch-b"></span>
+        <span class="notch notch-l"></span>
+        <span class="notch notch-r"></span>
+    </div>
+    <div class="site-bg" id="siteBg"></div>
+    <div class="bg-spotlight" id="bgSpotlight"></div>
+    <canvas id="techCanvas" class="tech-canvas"></canvas>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><span class="logo-accent">[⚡</span>HUY.WS<span
+                    class="logo-accent">]</span></a>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html#about" class="nav-item">Về tôi</a>
+                <a href="index.html#skills" class="nav-item">Kỹ năng</a>
+                <a href="index.html#projects" class="nav-item">Dự án</a>
+                <a href="index.html#contact" class="nav-item">Liên hệ</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="cv-nav-links">
+                    <a href="Personal%20Information/CV_Vietnamese_version.pdf" target="_blank" rel="noopener"
+                        class="nav-cv-btn"><i class="fa-solid fa-file-pdf"></i> CV (VN)</a>
+                </div>
+                <button id="themeToggle" class="icon-btn" type="button" title="Chuyển chế độ sáng/tối"
+                    aria-label="Chuyển chế độ sáng/tối"><i class="fa-solid fa-moon"></i></button>
+                <button id="mobileMenuBtn" class="mobile-toggle icon-btn" type="button" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="project-detail-section">
+        <div class="project-detail-container">
+            <div class="project-breadcrumb">
+                <a class="project-back-link" href="index.html#projects">
+                    <i class="fa-solid fa-arrow-left"></i> Quay lại dự án
+                </a>
+            </div>
+
+            <section class="project-detail-hero" aria-labelledby="projectTitle">
+                <div class="project-detail-copy">
+                    <p class="project-detail-eyebrow">Dự án Robotics & Tự động hóa</p>
+                    <h1 class="project-detail-title" id="projectTitle">Xe Tự Hành Vận Chuyển AMR / AGV</h1>
+                    <p class="project-detail-summary">
+                        Hệ thống robot vận chuyển đa hướng, kết hợp LiDAR 2D và SLAM để định vị, lập bản đồ và hỗ trợ
+                        tránh vật cản trong môi trường kho.
+                    </p>
+                    <div class="project-detail-tags" aria-label="Công nghệ sử dụng">
+                        <span class="tag">ROS2</span>
+                        <span class="tag">LiDAR 2D</span>
+                        <span class="tag">ESP32</span>
+                        <span class="tag">SLAM</span>
+                    </div>
+                    <div class="project-detail-actions">
+                        <a class="btn btn-primary"
+                            href="mailto:dinhhuy76.mechatronics@gmail.com?subject=Trao%20%C4%91%E1%BB%95i%20v%E1%BB%81%20d%E1%BB%B1%20%C3%A1n%20AMR">
+                            <i class="fa-regular fa-envelope"></i> Trao đổi về dự án
+                        </a>
+                        <a class="btn btn-secondary" href="index.html#projects">Các dự án khác</a>
+                    </div>
+                </div>
+                <img class="project-detail-image"
+                    src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85"
+                    alt="Hình minh họa hệ thống điện tử cho robot tự hành">
+            </section>
+
+            <div class="project-detail-content">
+                <section class="project-detail-card">
+                    <h2>Tổng quan</h2>
+                    <p>
+                        Dự án hướng đến robot tự hành vận chuyển hàng trong kho. Nền tảng đa hướng hỗ trợ di chuyển
+                        linh hoạt; cảm biến LiDAR 2D cung cấp dữ liệu môi trường cho bài toán định vị và lập bản đồ.
+                    </p>
+                    <p>
+                        ROS2 và SLAM là các thành phần phần mềm chính được nêu trong dự án. Hệ thống sử dụng dữ liệu
+                        cảm biến để nhận biết chướng ngại vật và hỗ trợ điều hướng.
+                    </p>
+                </section>
+                <aside class="project-detail-card">
+                    <h2>Điểm nhấn kỹ thuật</h2>
+                    <ul class="project-detail-list">
+                        <li><i class="fa-solid fa-check"></i><span>Định vị và lập bản đồ với LiDAR 2D / SLAM</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Tích hợp hệ sinh thái ROS2</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>ESP32 trong hệ thống điều khiển</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Hỗ trợ phát hiện và tránh vật cản</span></li>
+                    </ul>
+                </aside>
+            </div>
+
+            <section class="project-detail-footer">
+                <p>Bạn muốn trao đổi thêm về robot tự hành hoặc điều hướng?</p>
+                <a class="btn btn-primary" href="mailto:dinhhuy76.mechatronics@gmail.com">
+                    <i class="fa-regular fa-paper-plane"></i> Liên hệ
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© <span id="year"></span> Nguyễn Đình Huy | Kỹ Sư Cơ Điện Tử & Robotics</p>
+    </footer>
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
