@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Chi tiết dự án robot tự hành AMR/AGV với ROS2, LiDAR, SLAM và khả năng vận chuyển trong kho.">
-    <title>Xe Tự Hành AMR / AGV | Nguyễn Đình Huy</title>
+        content="Đồ án thiết kế và mô phỏng robot tự hành nâng kệ chui gầm với ROS 2 Nav2, Gazebo, AprilTag, SolidWorks và các bản vẽ cơ khí, điện.">
+    <title>Robot tự hành nâng kệ chui gầm | Nguyễn Đình Huy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -62,56 +62,148 @@
 
             <section class="project-detail-hero" aria-labelledby="projectTitle">
                 <div class="project-detail-copy">
-                    <p class="project-detail-eyebrow">Dự án Robotics & Tự động hóa</p>
-                    <h1 class="project-detail-title" id="projectTitle">Xe Tự Hành Vận Chuyển AMR / AGV</h1>
+                    <p class="project-detail-eyebrow">Đồ án Robotics &amp; Digital Twin</p>
+                    <h1 class="project-detail-title" id="projectTitle">Robot tự hành nâng kệ chui gầm</h1>
                     <p class="project-detail-summary">
-                        Hệ thống robot vận chuyển đa hướng, kết hợp LiDAR 2D và SLAM để định vị, lập bản đồ và hỗ trợ
-                        tránh vật cản trong môi trường kho.
+                        Thiết kế hệ thống cơ khí, điện và xây dựng bản sao kỹ thuật số cho AMR logistics có cơ cấu
+                        nâng kệ. Thuật toán điều hướng và ghép nối được kiểm chứng trong môi trường mô phỏng Gazebo.
                     </p>
                     <div class="project-detail-tags" aria-label="Công nghệ sử dụng">
-                        <span class="tag">ROS2</span>
-                        <span class="tag">LiDAR 2D</span>
-                        <span class="tag">ESP32</span>
-                        <span class="tag">SLAM</span>
+                        <span class="tag">ROS 2 Humble</span>
+                        <span class="tag">Nav2 / AMCL</span>
+                        <span class="tag">Gazebo</span>
+                        <span class="tag">AprilTag</span>
+                        <span class="tag">SolidWorks</span>
+                        <span class="tag">AutoCAD Electrical</span>
                     </div>
                     <div class="project-detail-actions">
                         <a class="btn btn-primary"
-                            href="mailto:dinhhuy76.mechatronics@gmail.com?subject=Trao%20%C4%91%E1%BB%95i%20v%E1%BB%81%20d%E1%BB%B1%20%C3%A1n%20AMR">
+                            href="mailto:dinhhuy76.mechatronics@gmail.com?subject=Trao%20%C4%91%E1%BB%95i%20v%E1%BB%81%20Robot%20t%E1%BB%B1%20h%C3%A0nh%20n%C3%A2ng%20k%E1%BB%87%20chui%20g%E1%BA%A7m">
                             <i class="fa-regular fa-envelope"></i> Trao đổi về dự án
                         </a>
                         <a class="btn btn-secondary" href="index.html#projects">Các dự án khác</a>
                     </div>
                 </div>
-                <img class="project-detail-image"
-                    src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85"
-                    alt="Hình minh họa hệ thống điện tử cho robot tự hành">
+                <img class="project-detail-image" src="project-assets/amr/amr-composite-poster.avif"
+                    alt="Hai phương án poster robot tự hành nâng kệ chui gầm, ghép cạnh nhau">
             </section>
 
             <div class="project-detail-content">
                 <section class="project-detail-card">
-                    <h2>Tổng quan</h2>
+                    <h2>Tổng quan đồ án</h2>
                     <p>
-                        Dự án hướng đến robot tự hành vận chuyển hàng trong kho. Nền tảng đa hướng hỗ trợ di chuyển
-                        linh hoạt; cảm biến LiDAR 2D cung cấp dữ liệu môi trường cho bài toán định vị và lập bản đồ.
+                        Đồ án nghiên cứu, thiết kế cơ sở và mô phỏng AMR dạng chui gầm phục vụ logistics. Phạm vi
+                        thực hiện bao gồm thiết kế cơ khí 3D/2D, kiến trúc hệ thống điện và xây dựng chương trình mô
+                        phỏng dùng Gazebo trên hệ điều hành Ubuntu ROS2
+                        để kiểm chứng thiết kế, thuật toán trước khi chế tạo phần cứng.
                     </p>
                     <p>
-                        ROS2 và SLAM là các thành phần phần mềm chính được nêu trong dự án. Hệ thống sử dụng dữ liệu
-                        cảm biến để nhận biết chướng ngại vật và hỗ trợ điều hướng.
+                        Hệ thống điều hướng dựa trên ROS 2 Humble với Nav2, AMCL và BehaviorTree. Trong mô phỏng,
+                        robot nhận diện AprilTag để tiếp cận chính xác và chui gầm kệ; sai số góc hướng mục tiêu
+                        trong các bài kiểm tra là dưới 20mm và 5°.
                     </p>
                 </section>
                 <aside class="project-detail-card">
-                    <h2>Điểm nhấn kỹ thuật</h2>
+                    <h2>Hạng mục thực hiện</h2>
                     <ul class="project-detail-list">
-                        <li><i class="fa-solid fa-check"></i><span>Định vị và lập bản đồ với LiDAR 2D / SLAM</span></li>
-                        <li><i class="fa-solid fa-check"></i><span>Tích hợp hệ sinh thái ROS2</span></li>
-                        <li><i class="fa-solid fa-check"></i><span>ESP32 trong hệ thống điều khiển</span></li>
-                        <li><i class="fa-solid fa-check"></i><span>Hỗ trợ phát hiện và tránh vật cản</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Thiết kế mô hình 3D và bản vẽ lắp cơ khí</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Thiết kế kiến trúc điện và bố trí điều khiển với IPC
+                                UNO-2372G</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Xây dựng điều hướng ROS 2 Nav2, AMCL và
+                                BehaviorTree</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Mô phỏng ghép nối Visual Docking bằng AprilTag</span>
+                        </li>
+                        <li><i class="fa-solid fa-check"></i><span>Kiểm chứng kịch bản hoạt động trên Gazebo</span></li>
                     </ul>
                 </aside>
             </div>
 
+            <section class="project-media-section" aria-labelledby="amrModelTitle">
+                <div class="section-header">
+                    <h2 class="section-title neon-text" id="amrModelTitle">Thiết kế 3D &amp; cơ cấu nâng</h2>
+                    <p class="section-desc">Các góc nhìn mô hình CAD và cụm nâng kệ của robot</p>
+                </div>
+                <div class="project-media-grid">
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/amr/amr-3d-raised-platform.webp"
+                            alt="Mô hình 3D AMR với cơ cấu nâng kệ ở trạng thái nâng">
+                        <figcaption>AMR và cơ cấu nâng kệ</figcaption>
+                    </figure>
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/amr/amr-3d-enclosed-body.webp"
+                            alt="Mô hình 3D thiết kế vỏ robot tự hành chui gầm">
+                        <figcaption>Thiết kế vỏ và bố trí thân robot</figcaption>
+                    </figure>
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/amr/amr-side-view.webp"
+                            alt="Bản vẽ mô hình 3D robot nhìn ngang với cơ cấu nâng">
+                        <figcaption>Kiểm tra hình học cơ cấu nâng ở góc nhìn ngang</figcaption>
+                    </figure>
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/amr/amr-lift-mechanism.webp"
+                            alt="Mô hình chi tiết cơ cấu nâng dạng chữ X dưới mặt bàn">
+                        <figcaption>Cơ cấu nâng dạng chữ X</figcaption>
+                    </figure>
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/amr/amr-robot-specifications.webp"
+                            alt="Hình thông số và cấu hình robot tự hành">
+                        <figcaption>Thông số và cấu hình robot</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="project-media-section" aria-labelledby="amrAnalysisTitle">
+                <div class="section-header">
+                    <h2 class="section-title neon-text" id="amrAnalysisTitle">Mô phỏng bền &amp; chuyển vị</h2>
+                    <p class="section-desc">Kết quả phân tích khung robot và bàn nâng trong bộ tài liệu đồ án</p>
+                </div>
+                <div class="project-media-grid">
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/amr/amr-frame-stress.webp"
+                            alt="Kết quả mô phỏng ứng suất von Mises của khung robot">
+                        <figcaption>Phân tích ứng suất khung</figcaption>
+                    </figure>
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/amr/amr-lift-stress.webp"
+                            alt="Kết quả mô phỏng ứng suất von Mises trên bàn nâng">
+                        <figcaption>Phân tích ứng suất bàn nâng</figcaption>
+                    </figure>
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/amr/amr-frame-displacement.webp"
+                            alt="Kết quả mô phỏng chuyển vị trên khung robot">
+                        <figcaption>Phân tích chuyển vị khung</figcaption>
+                    </figure>
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/amr/amr-lift-displacement.webp"
+                            alt="Kết quả mô phỏng chuyển vị trên cơ cấu nâng">
+                        <figcaption>Phân tích chuyển vị bàn nâng</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="project-media-section" aria-labelledby="amrSimulationTitle">
+                <div class="section-header">
+                    <h2 class="section-title neon-text" id="amrSimulationTitle">Video mô phỏng hoạt động</h2>
+                    <p class="section-desc">Robot tiếp cận và thao tác trong môi trường mô phỏng Gazebo</p>
+                </div>
+                <div class="project-media-card cyber-glass project-video-card">
+                    <video controls preload="metadata" playsinline poster="project-assets/amr/amr-composite-poster.avif"
+                        aria-label="Video mô phỏng robot tự hành nâng kệ chui gầm">
+                        <source src="project-assets/amr/amr-under-rack-simulation.mp4" type="video/mp4">
+                        Trình duyệt của bạn không hỗ trợ phát video.
+                    </video>
+                </div>
+            </section>
+
+            <section class="project-detail-card project-files-section">
+                <h2>Mô hình CAD &amp; mã nguồn</h2>
+                <a class="btn btn-secondary" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-github"></i> Mô hình CAD &amp; mã nguồn
+                </a>
+            </section>
+
             <section class="project-detail-footer">
-                <p>Bạn muốn trao đổi thêm về robot tự hành hoặc điều hướng?</p>
+                <p>Bạn muốn trao đổi thêm về thiết kế AMR, mô phỏng hoặc điều hướng robot?</p>
                 <a class="btn btn-primary" href="mailto:dinhhuy76.mechatronics@gmail.com">
                     <i class="fa-regular fa-paper-plane"></i> Liên hệ
                 </a>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Hexapod Robot sáu chân: tính toán, thiết kế cơ khí, đấu dây và phối hợp lập trình điều khiển khớp.">
+    <title>Hexapod Robot | Nguyễn Đình Huy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="cyber-cursor-dot" id="cursorDot"></div>
+    <div class="cyber-cursor-ring" id="cursorRing">
+        <span class="notch notch-t"></span>
+        <span class="notch notch-b"></span>
+        <span class="notch notch-l"></span>
+        <span class="notch notch-r"></span>
+    </div>
+    <div class="site-bg" id="siteBg"></div>
+    <div class="bg-spotlight" id="bgSpotlight"></div>
+    <canvas id="techCanvas" class="tech-canvas"></canvas>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><span class="logo-accent">[⚡</span>HUY.WS<span
+                    class="logo-accent">]</span></a>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html#about" class="nav-item">Về tôi</a>
+                <a href="index.html#skills" class="nav-item">Kỹ năng</a>
+                <a href="index.html#projects" class="nav-item">Dự án</a>
+                <a href="index.html#contact" class="nav-item">Liên hệ</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="cv-nav-links">
+                    <a href="Personal%20Information/CV_Vietnamese_version.pdf" target="_blank" rel="noopener"
+                        class="nav-cv-btn"><i class="fa-solid fa-file-pdf"></i> CV (VN)</a>
+                </div>
+                <button id="themeToggle" class="icon-btn" type="button" title="Chuyển chế độ sáng/tối"
+                    aria-label="Chuyển chế độ sáng/tối"><i class="fa-solid fa-moon"></i></button>
+                <button id="mobileMenuBtn" class="mobile-toggle icon-btn" type="button" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="project-detail-section">
+        <div class="project-detail-container">
+            <div class="project-breadcrumb">
+                <a class="project-back-link" href="index.html#projects">
+                    <i class="fa-solid fa-arrow-left"></i> Quay lại dự án
+                </a>
+            </div>
+
+            <section class="project-detail-hero" aria-labelledby="projectTitle">
+                <div class="project-detail-copy">
+                    <p class="project-detail-eyebrow">Thiết kế cơ khí &amp; Robotics</p>
+                    <h1 class="project-detail-title" id="projectTitle">Hexapod Robot</h1>
+                    <p class="project-detail-summary">
+                        Robot sáu chân với 18 bậc tự do. Phần mình phụ trách chính là tính toán, thiết kế cơ khí,
+                        phối hợp lập trình điều khiển các khớp và đấu dây hệ thống.
+                    </p>
+                    <div class="project-detail-tags" aria-label="Công nghệ sử dụng">
+                        <span class="tag">Mechanical Design</span>
+                        <span class="tag">ESP32-C3</span>
+                        <span class="tag">PCA9685</span>
+                        <span class="tag">Servo Control</span>
+                        <span class="tag">MATLAB</span>
+                    </div>
+                    <div class="project-detail-actions">
+                        <a class="btn btn-primary"
+                            href="mailto:dinhhuy76.mechatronics@gmail.com?subject=Trao%20%C4%91%E1%BB%95i%20v%E1%BB%81%20d%E1%BB%B1%20%C3%A1n%20Hexapod">
+                            <i class="fa-regular fa-envelope"></i> Trao đổi về dự án
+                        </a>
+                        <a class="btn btn-secondary" href="index.html#projects">Các dự án khác</a>
+                    </div>
+                </div>
+                <img class="project-detail-image"
+                    src="project-assets/hexapod/hexapod-assembly.jpg"
+                    alt="Robot Hexapod sáu chân sau khi lắp ráp">
+            </section>
+
+            <div class="project-detail-content">
+                <section class="project-detail-card">
+                    <h2>Vai trò &amp; công việc của mình</h2>
+                    <p>
+                        Mình tập trung vào tính toán và thiết kế cơ khí cho robot Hexapod sáu chân, mỗi chân có ba
+                        bậc tự do. Công việc còn gồm đi dây, tích hợp servo với bộ điều khiển và phối hợp lập trình
+                        chuyển động các khớp.
+                    </p>
+                    <p>
+                        Nhóm dùng ESP32-C3 và hai driver PCA9685 để điều khiển 18 servo. Các script MATLAB hỗ trợ
+                        dựng mô hình, kiểm tra động học và thử nghiệm dáng đi trước khi chạy trên robot.
+                    </p>
+                </section>
+                <aside class="project-detail-card">
+                    <h2>Thông số &amp; tích hợp</h2>
+                    <ul class="project-detail-list">
+                        <li><i class="fa-solid fa-check"></i><span>6 chân, 3 bậc tự do mỗi chân (18 khớp servo)</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Tính toán hình học chân và bố trí cơ khí</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>ESP32-C3 giao tiếp I²C với hai PCA9685</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Đấu dây, tích hợp servo và phối hợp lập trình chuyển động</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Mô phỏng dáng đi tripod và chuyển động chân bằng MATLAB</span></li>
+                    </ul>
+                </aside>
+            </div>
+
+            <section class="project-media-section" aria-labelledby="hexapodGalleryTitle">
+                <div class="section-header">
+                    <h2 class="section-title neon-text" id="hexapodGalleryTitle">Hình ảnh dự án</h2>
+                    <p class="section-desc">Robot sau lắp ráp và các góc nhìn trong quá trình tích hợp</p>
+                </div>
+                <div class="project-media-grid">
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/hexapod/hexapod-assembly.jpg"
+                            alt="Hexapod đã lắp ráp, góc nhìn phía trước" loading="lazy">
+                        <figcaption>Robot Hexapod sau lắp ráp</figcaption>
+                    </figure>
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/hexapod/hexapod-wiring.jpg"
+                            alt="Góc nhìn từ trên xuống các servo và dây nối trên Hexapod" loading="lazy">
+                        <figcaption>Bố trí servo và đi dây trên thân robot</figcaption>
+                    </figure>
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/hexapod/hexapod-test.jpg"
+                            alt="Hexapod trong quá trình kiểm tra và tích hợp" loading="lazy">
+                        <figcaption>Kiểm tra và tích hợp hệ thống</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="project-media-section" aria-labelledby="hexapodVideoTitle">
+                <div class="section-header">
+                    <h2 class="section-title neon-text" id="hexapodVideoTitle">Video mô phỏng &amp; lắp ráp 3D</h2>
+                    <p class="section-desc">Mô phỏng chuyển động và hình ảnh lắp ráp 3D của robot sáu chân</p>
+                </div>
+                <div class="project-media-grid">
+                    <article class="project-media-card cyber-glass">
+                        <h3>Mô phỏng chuyển động</h3>
+                        <video controls preload="metadata" playsinline
+                            poster="project-assets/hexapod/hexapod-assembly.jpg"
+                            aria-label="Video mô phỏng chuyển động robot Hexapod sáu chân">
+                            <source src="project-assets/hexapod/hexapod-simulation.mp4" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ phát video.
+                        </video>
+                    </article>
+                    <article class="project-media-card cyber-glass">
+                        <h3>Lắp ráp 3D</h3>
+                        <video controls preload="metadata" playsinline
+                            poster="project-assets/hexapod/hexapod-poster.jpg"
+                            aria-label="Video lắp ráp 3D robot Hexapod">
+                            <source src="project-assets/hexapod/3D%20Assembly.mp4" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ phát video.
+                        </video>
+                    </article>
+                </div>
+            </section>
+
+            <section class="project-detail-card project-files-section">
+                <h2>Mô hình CAD &amp; mã nguồn</h2>
+                <a class="btn btn-secondary" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-github"></i> Mô hình CAD &amp; mã nguồn
+                </a>
+            </section>
+
+            <section class="project-detail-footer">
+                <p>Bạn muốn trao đổi thêm về thiết kế cơ khí hoặc robot Hexapod?</p>
+                <a class="btn btn-primary" href="mailto:dinhhuy76.mechatronics@gmail.com">
+                    <i class="fa-regular fa-paper-plane"></i> Liên hệ
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© <span id="year"></span> Nguyễn Đình Huy | Kỹ Sư Cơ Điện Tử & Robotics</p>
+    </footer>
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>

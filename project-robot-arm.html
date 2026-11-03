@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Chi tiết dự án cánh tay robot 4 bậc tự do: thiết kế cơ khí, động học nghịch và điều khiển PID.">
-    <title>Cánh Tay Robot 4-DOF | Nguyễn Đình Huy</title>
+        content="Mô phỏng cánh tay robot 4 bậc tự do trên MATLAB/Simulink để học động học nghịch và lập quỹ đạo.">
+    <title>Mô phỏng Cánh Tay Robot 4-DOF | Nguyễn Đình Huy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -62,55 +62,96 @@
 
             <section class="project-detail-hero" aria-labelledby="projectTitle">
                 <div class="project-detail-copy">
-                    <p class="project-detail-eyebrow">Dự án Robotics</p>
-                    <h1 class="project-detail-title" id="projectTitle">Cánh Tay Robot 4 Bậc Tự Do</h1>
+                    <p class="project-detail-eyebrow">Mô phỏng &amp; học tập Robotics</p>
+                    <h1 class="project-detail-title" id="projectTitle">Mô phỏng Cánh Tay Robot 4 Bậc Tự Do</h1>
                     <p class="project-detail-summary">
-                        Thiết kế kết cấu 3D, gia công cơ khí và ứng dụng động học nghịch để điều khiển cánh tay robot
-                        gắp thả linh kiện.
+                        Tích hợp mô hình cánh tay 4-DOF có sẵn vào MATLAB/Simulink để thực hành động học, lập quỹ đạo
+                        và quan sát chuyển động các khớp.
                     </p>
                     <div class="project-detail-tags" aria-label="Công nghệ sử dụng">
-                        <span class="tag">STM32F4</span>
-                        <span class="tag">SolidWorks</span>
-                        <span class="tag">Kinematics</span>
-                        <span class="tag">PID</span>
+                        <span class="tag">MATLAB</span>
+                        <span class="tag">Simulink</span>
+                        <span class="tag">Inverse Kinematics</span>
+                        <span class="tag">Trajectory Planning</span>
                     </div>
                     <div class="project-detail-actions">
                         <a class="btn btn-primary"
-                            href="mailto:dinhhuy76.mechatronics@gmail.com?subject=Trao%20%C4%91%E1%BB%95i%20v%E1%BB%81%20d%E1%BB%B1%20%C3%A1n%20c%C3%A1nh%20tay%20robot">
+                            href="mailto:dinhhuy76.mechatronics@gmail.com?subject=Trao%20%C4%91%E1%BB%95i%20v%E1%BB%81%20m%C3%B4%20ph%E1%BB%8Fng%20robot%204-DOF">
                             <i class="fa-regular fa-envelope"></i> Trao đổi về dự án
                         </a>
                         <a class="btn btn-secondary" href="index.html#projects">Các dự án khác</a>
                     </div>
                 </div>
-                <img class="project-detail-image"
-                    src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=85"
-                    alt="Hình minh họa cánh tay robot">
+                <img class="project-detail-image" src="project-assets/4dof/poster.avif"
+                    alt="Khung hình mô phỏng cánh tay robot 4 bậc tự do">
             </section>
 
             <div class="project-detail-content">
                 <section class="project-detail-card">
                     <h2>Tổng quan</h2>
                     <p>
-                        Dự án tập trung vào một cánh tay robot 4 bậc tự do phục vụ thao tác gắp và đặt linh kiện.
-                        Thiết kế cơ khí 3D là nền tảng để bố trí các khớp và kiểm tra chuyển động trước khi triển khai.
+                        Đây là dự án mô phỏng phục vụ học tập. Mô hình cơ khí 4-DOF được lấy từ một nguồn có sẵn trên
+                        mạng và đưa vào MATLAB/Simulink; mình không tự thiết kế hay chế tạo cánh tay robot.
                     </p>
                     <p>
-                        Phần điều khiển kết hợp động học nghịch (Inverse Kinematics) để xác định chuyển động khớp từ
-                        vị trí đầu gắp mong muốn, cùng PID để điều khiển chuyển động.
+                        Phần mình thực hiện tập trung vào lập trình MATLAB: giải động học nghịch từ tọa độ và góc
+                        hướng đầu công tác, kiểm tra lại bằng động học thuận, tạo quỹ đạo và đưa dữ liệu góc khớp sang
+                        Simulink để quan sát chuyển động.
                     </p>
                 </section>
                 <aside class="project-detail-card">
-                    <h2>Điểm nhấn kỹ thuật</h2>
+                    <h2>Nội dung thực hiện</h2>
                     <ul class="project-detail-list">
-                        <li><i class="fa-solid fa-check"></i><span>Kết cấu và mô hình 3D bằng SolidWorks</span></li>
-                        <li><i class="fa-solid fa-check"></i><span>Động học nghịch cho cơ cấu 4 bậc tự do</span></li>
-                        <li><i class="fa-solid fa-check"></i><span>Điều khiển trên nền tảng STM32F4 và PID</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Giải động học nghịch và đối chiếu động học thuận</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Tạo quỹ đạo điểm, đường tròn và tam giác</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Nội suy góc khớp và truyền dữ liệu vào Simulink</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Quan sát đường đi và góc các khớp qua mô phỏng</span></li>
                     </ul>
                 </aside>
             </div>
 
+            <section class="project-media-section" aria-labelledby="simulationVideosTitle">
+                <div class="section-header">
+                    <h2 class="section-title neon-text" id="simulationVideosTitle">Video mô phỏng</h2>
+                    <p class="section-desc">Một số bản ghi quá trình chạy mô phỏng trong MATLAB/Simulink</p>
+                </div>
+                <div class="project-media-grid">
+                    <article class="project-media-card cyber-glass">
+                        <h3>Video mô phỏng 1</h3>
+                        <video controls preload="none" playsinline poster="project-assets/4dof/poster.avif"
+                            aria-label="Video mô phỏng cánh tay robot 4 bậc tự do, bản ghi 1">
+                            <source src="project-assets/4dof/simulation-1.mp4" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ phát video.
+                        </video>
+                    </article>
+                    <article class="project-media-card cyber-glass">
+                        <h3>Video mô phỏng 2</h3>
+                        <video controls preload="none" playsinline poster="project-assets/4dof/poster.avif"
+                            aria-label="Video mô phỏng cánh tay robot 4 bậc tự do, bản ghi 2">
+                            <source src="project-assets/4dof/simulation-2.mp4" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ phát video.
+                        </video>
+                    </article>
+                    <article class="project-media-card cyber-glass">
+                        <h3>Video mô phỏng 3</h3>
+                        <video controls preload="none" playsinline poster="project-assets/4dof/poster.avif"
+                            aria-label="Video mô phỏng cánh tay robot 4 bậc tự do, bản ghi 3">
+                            <source src="project-assets/4dof/simulation-3.mp4" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ phát video.
+                        </video>
+                    </article>
+                </div>
+            </section>
+
+            <section class="project-detail-card project-files-section">
+                <h2>Mô hình CAD &amp; mã nguồn</h2>
+                <a class="btn btn-secondary" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-github"></i> Mô hình CAD &amp; mã nguồn
+                </a>
+            </section>
+
             <section class="project-detail-footer">
-                <p>Bạn muốn trao đổi thêm về thiết kế hoặc điều khiển robot?</p>
+                <p>Bạn muốn trao đổi thêm về mô phỏng robot 4-DOF?</p>
                 <a class="btn btn-primary" href="mailto:dinhhuy76.mechatronics@gmail.com">
                     <i class="fa-regular fa-paper-plane"></i> Liên hệ
                 </a>

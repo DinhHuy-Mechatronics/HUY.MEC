@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Dự án xe dò line phân loại hàng hóa theo màu sắc: mô phỏng, mô hình hóa, hiệu chuẩn cảm biến, tính hàm truyền và thiết kế PID động cơ.">
+    <title>Xe dò line phân loại hàng hóa theo màu sắc | Nguyễn Đình Huy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="cyber-cursor-dot" id="cursorDot"></div>
+    <div class="cyber-cursor-ring" id="cursorRing">
+        <span class="notch notch-t"></span>
+        <span class="notch notch-b"></span>
+        <span class="notch notch-l"></span>
+        <span class="notch notch-r"></span>
+    </div>
+    <div class="site-bg" id="siteBg"></div>
+    <div class="bg-spotlight" id="bgSpotlight"></div>
+    <canvas id="techCanvas" class="tech-canvas"></canvas>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><span class="logo-accent">[⚡</span>HUY.WS<span
+                    class="logo-accent">]</span></a>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html#about" class="nav-item">Về tôi</a>
+                <a href="index.html#skills" class="nav-item">Kỹ năng</a>
+                <a href="index.html#projects" class="nav-item">Dự án</a>
+                <a href="index.html#contact" class="nav-item">Liên hệ</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="cv-nav-links">
+                    <a href="Personal%20Information/CV_Vietnamese_version.pdf" target="_blank" rel="noopener"
+                        class="nav-cv-btn"><i class="fa-solid fa-file-pdf"></i> CV (VN)</a>
+                </div>
+                <button id="themeToggle" class="icon-btn" type="button" title="Chuyển chế độ sáng/tối"
+                    aria-label="Chuyển chế độ sáng/tối"><i class="fa-solid fa-moon"></i></button>
+                <button id="mobileMenuBtn" class="mobile-toggle icon-btn" type="button" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="project-detail-section">
+        <div class="project-detail-container">
+            <div class="project-breadcrumb">
+                <a class="project-back-link" href="index.html#projects">
+                    <i class="fa-solid fa-arrow-left"></i> Quay lại dự án
+                </a>
+            </div>
+
+            <section class="project-detail-hero" aria-labelledby="projectTitle">
+                <div class="project-detail-copy">
+                    <p class="project-detail-eyebrow">Mô phỏng &amp; điều khiển Robotics</p>
+                    <h1 class="project-detail-title" id="projectTitle">Xe dò line phân loại hàng hóa theo màu sắc</h1>
+                    <p class="project-detail-summary">
+                        Mình phụ trách mô phỏng, mô hình hóa hệ thống, hiệu chuẩn cảm biến và tính toán hàm truyền,
+                        thiết kế PID cho động cơ; đồng thời hỗ trợ xây dựng giải thuật và lập trình robot.
+                    </p>
+                    <div class="project-detail-tags" aria-label="Công nghệ sử dụng">
+                        <span class="tag">ESP32</span>
+                        <span class="tag">IR Sensor Array</span>
+                        <span class="tag">PID Control</span>
+                        <span class="tag">Color Detection</span>
+                        <span class="tag">MATLAB</span>
+                    </div>
+                    <div class="project-detail-actions">
+                        <a class="btn btn-primary"
+                            href="mailto:dinhhuy76.mechatronics@gmail.com?subject=Trao%20%C4%91%E1%BB%95i%20v%E1%BB%81%20xe%20d%C3%B2%20line%20ph%C3%A2n%20lo%E1%BA%A1i%20h%C3%A0ng%20h%C3%B3a">
+                            <i class="fa-regular fa-envelope"></i> Trao đổi về dự án
+                        </a>
+                        <a class="btn btn-secondary" href="index.html#projects">Các dự án khác</a>
+                    </div>
+                </div>
+                <img class="project-detail-image"
+                    src="project-assets/line-follower/line-follower-poster.avif"
+                    alt="Poster dự án Mini AGV dò line và phân loại hàng hóa">
+            </section>
+
+            <div class="project-detail-content">
+                <section class="project-detail-card">
+                    <h2>Vai trò chính của mình</h2>
+                    <p>
+                        Mình xây dựng mô hình và mô phỏng hoạt động của xe để kiểm tra hướng điều khiển trước khi
+                        chạy thử trên robot. Từ dữ liệu động cơ, mình tính toán hàm truyền và thiết kế, hiệu chỉnh
+                        bộ điều khiển PID nhằm giúp xe bám line ổn định hơn.
+                    </p>
+                    <p>
+                        Mình cũng hiệu chuẩn cảm biến dò line và cảm biến màu, hỗ trợ xây dựng giải thuật nhận biết
+                        đường đi/phân loại hàng hóa, rồi phối hợp lập trình và kiểm thử toàn hệ thống.
+                    </p>
+                </section>
+                <aside class="project-detail-card">
+                    <h2>Hạng mục mình thực hiện</h2>
+                    <ul class="project-detail-list">
+                        <li><i class="fa-solid fa-check"></i><span>Mô phỏng và mô hình hóa hệ thống robot</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Hiệu chuẩn cảm biến dò line và cảm biến màu</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Tính toán hàm truyền động cơ DC</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Thiết kế, hiệu chỉnh PID cho động cơ</span></li>
+                        <li><i class="fa-solid fa-check"></i><span>Hỗ trợ giải thuật và lập trình điều khiển</span></li>
+                    </ul>
+                </aside>
+            </div>
+
+            <section class="project-detail-card project-files-section">
+                <h2>Từ mô hình đến chạy thử</h2>
+                <p>
+                    Mình bắt đầu bằng mô hình hóa động cơ và hệ thống cảm biến, sau đó dùng mô phỏng để đánh giá
+                    đáp ứng điều khiển. Khi tích hợp lên xe, mình hiệu chuẩn cảm biến, tinh chỉnh PID và phối hợp
+                    kiểm thử khả năng bám line, nhận biết màu và phân loại hàng.
+                </p>
+                <p class="project-source-note">
+                    Quy trình thử nghiệm được ghi lại trong các video bên dưới, gồm hiệu chuẩn cảm biến, chạy thử
+                    theo line và lần vận hành thành công.
+                </p>
+            </section>
+
+            <section class="project-media-section" aria-labelledby="lineGalleryTitle">
+                <div class="section-header">
+                    <h2 class="section-title neon-text" id="lineGalleryTitle">Hình ảnh dự án</h2>
+                    <p class="section-desc">Hình ảnh xe thử nghiệm và cụm cảm biến dò line</p>
+                </div>
+                <div class="project-media-grid">
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/line-follower/line-robot-test.webp"
+                            alt="Xe dò line trong quá trình thử nghiệm">
+                        <figcaption>Xe robot trong quá trình thử nghiệm</figcaption>
+                    </figure>
+                    <figure class="project-media-card cyber-glass">
+                        <img src="project-assets/line-follower/line-sensor-module.webp"
+                            alt="Dãy cảm biến hồng ngoại dùng để nhận biết vạch line">
+                        <figcaption>Dãy cảm biến dò line</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="project-media-section" aria-labelledby="lineVideoTitle">
+                <div class="section-header">
+                    <h2 class="section-title neon-text" id="lineVideoTitle">Video hiệu chuẩn &amp; chạy thử</h2>
+                    <p class="section-desc">Các video đã được loại bỏ hoàn toàn âm thanh</p>
+                </div>
+                <div class="project-media-grid">
+                    <article class="project-media-card cyber-glass">
+                        <h3>Hiệu chuẩn cảm biến</h3>
+                        <video controls muted preload="none" playsinline
+                            poster="project-assets/line-follower/line-robot-test.webp"
+                            aria-label="Video hiệu chuẩn cảm biến xe dò line, không có âm thanh">
+                            <source src="project-assets/line-follower/sensor-calibration-muted.mp4" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ phát video.
+                        </video>
+                    </article>
+                    <article class="project-media-card cyber-glass">
+                        <h3>Chạy thử theo line - 1</h3>
+                        <video controls muted preload="none" playsinline
+                            poster="project-assets/line-follower/line-robot-test.webp"
+                            aria-label="Video chạy thử xe dò line lần một, không có âm thanh">
+                            <source src="project-assets/line-follower/line-following-test-1-muted.mp4" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ phát video.
+                        </video>
+                    </article>
+                    <article class="project-media-card cyber-glass">
+                        <h3>Chạy thử theo line - 2</h3>
+                        <video controls muted preload="none" playsinline
+                            poster="project-assets/line-follower/line-robot-test.webp"
+                            aria-label="Video chạy thử xe dò line lần hai, không có âm thanh">
+                            <source src="project-assets/line-follower/line-following-test-2-muted.mp4" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ phát video.
+                        </video>
+                    </article>
+                    <article class="project-media-card cyber-glass">
+                        <h3>Xe chạy thành công</h3>
+                        <video controls muted preload="none" playsinline
+                            poster="project-assets/line-follower/line-robot-test.webp"
+                            aria-label="Video xe dò line chạy thành công, không có âm thanh">
+                            <source src="project-assets/line-follower/successful-run-muted.mp4" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ phát video.
+                        </video>
+                    </article>
+                </div>
+            </section>
+
+            <section class="project-detail-card project-files-section">
+                <h2>Mô hình CAD &amp; mã nguồn</h2>
+                <a class="btn btn-secondary" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-github"></i> Mô hình CAD &amp; mã nguồn
+                </a>
+            </section>
+
+            <section class="project-detail-footer">
+                <p>Bạn muốn trao đổi thêm về robot dò line và hệ thống phân loại?</p>
+                <a class="btn btn-primary" href="mailto:dinhhuy76.mechatronics@gmail.com">
+                    <i class="fa-regular fa-paper-plane"></i> Liên hệ
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© <span id="year"></span> Nguyễn Đình Huy | Kỹ Sư Cơ Điện Tử &amp; Robotics</p>
+    </footer>
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>

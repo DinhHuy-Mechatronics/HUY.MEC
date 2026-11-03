@@ -29,15 +29,178 @@ const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const navLinks = document.getElementById('navLinks');
 
 mobileMenuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
+    const isOpen = navLinks.classList.toggle('active');
+    mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
 });
 
 // Close mobile menu when clicking a link
 document.querySelectorAll('.nav-item').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
     });
 });
+
+function initImageZoom() {
+    const images = Array.from(document.querySelectorAll('img:not([data-no-zoom])'));
+    if (images.length === 0) return;
+
+    const dialog = document.createElement('dialog');
+    dialog.className = 'image-zoom-dialog';
+    dialog.setAttribute('aria-label', 'Ảnh phóng to');
+
+    const closeButton = document.createElement('button');
+    closeButton.className = 'image-zoom-close';
+    closeButton.type = 'button';
+    closeButton.setAttribute('aria-label', 'Đóng ảnh phóng to');
+    closeButton.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
+
+    const zoomedImage = document.createElement('img');
+    zoomedImage.className = 'image-zoom-content';
+    zoomedImage.alt = '';
+
+    const caption = document.createElement('p');
+    caption.className = 'image-zoom-caption';
+
+    dialog.append(closeButton, zoomedImage, caption);
+    document.body.append(dialog);
+
+    function openImage(image) {
+        zoomedImage.src = image.currentSrc || image.src;
+        zoomedImage.alt = image.alt;
+        const figureCaption = image.closest('figure')?.querySelector('figcaption')?.textContent?.trim();
+        caption.textContent = figureCaption || image.alt;
+        dialog.showModal();
+        closeButton.focus();
+    }
+
+    closeButton.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            dialog.close();
+        }
+    });
+    dialog.addEventListener('click', event => {
+        if (event.target === dialog) dialog.close();
+    });
+
+    images.forEach(image => {
+        image.classList.add('zoomable-image');
+        image.tabIndex = 0;
+        image.setAttribute('aria-label', `Phóng to hình ảnh: ${image.alt || 'hình ảnh dự án'}`);
+
+        image.addEventListener('click', event => {
+            event.preventDefault();
+            event.stopPropagation();
+            openImage(image);
+        });
+
+        image.addEventListener('keydown', event => {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            event.stopPropagation();
+            openImage(image);
+        });
+    });
+}
+
+initImageZoom();
+
+// Hash-based views keep navigation shareable without reloading the page.
+const pageViews = Array.from(document.querySelectorAll('[data-view]'));
+const pageNavLinks = Array.from(document.querySelectorAll('.nav-item'));
+const heroIntro = document.getElementById('heroIntro');
+const namePrefix = document.getElementById('namePrefix');
+const nameHighlight = document.getElementById('nameHighlight');
+const heroName = document.getElementById('userName');
+const heroRole = document.getElementById('heroRole');
+let heroSequenceStarted = false;
+
+function playHeroSequence() {
+    if (heroSequenceStarted || !heroIntro || !namePrefix || !nameHighlight || !heroName || !heroRole) return;
+    heroSequenceStarted = true;
+
+    const greeting = 'Xin chào, mình là...';
+    const prefix = 'NGUYỄN ĐÌNH';
+    const highlight = 'HUY';
+    const role = 'Kỹ Sư Cơ Điện Tử & Robotics';
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reducedMotion) {
+        heroIntro.textContent = greeting;
+        namePrefix.textContent = prefix;
+        nameHighlight.textContent = highlight;
+        heroRole.textContent = role;
+        return;
+    }
+
+    document.body.classList.add('typewriter-ready');
+    heroIntro.textContent = '';
+    namePrefix.textContent = '';
+    nameHighlight.textContent = '';
+    heroRole.textContent = '';
+    heroIntro.classList.add('is-typing');
+
+    const typeText = async (target, text, delay) => {
+        for (const character of Array.from(text)) {
+            target.textContent += character;
+            await new Promise(resolve => window.setTimeout(resolve, delay));
+        }
+    };
+
+    void (async () => {
+        await typeText(heroIntro, greeting, 52);
+        heroIntro.classList.remove('is-typing');
+        await new Promise(resolve => window.setTimeout(resolve, 220));
+
+        heroName.classList.add('is-typing');
+        await typeText(namePrefix, prefix, 72);
+        await new Promise(resolve => window.setTimeout(resolve, 90));
+        await typeText(nameHighlight, highlight, 72);
+        heroName.classList.remove('is-typing');
+        heroName.classList.add('name-reveal');
+
+        await new Promise(resolve => window.setTimeout(resolve, 620));
+        heroRole.classList.add('is-typing');
+        await typeText(heroRole, role, 48);
+        heroRole.classList.remove('is-typing');
+    })();
+}
+
+function renderPageView() {
+    if (pageViews.length === 0) return;
+
+    const requestedView = window.location.hash.slice(1);
+    const activeView = pageViews.some(view => view.id === requestedView)
+        ? requestedView
+        : 'hero';
+
+    pageViews.forEach(view => {
+        const isActive = view.id === activeView;
+        view.hidden = !isActive;
+        view.setAttribute('aria-hidden', String(!isActive));
+        view.classList.toggle('view-enter', isActive);
+    });
+
+    pageNavLinks.forEach(link => {
+        const isActive = link.hash === `#${activeView}`;
+        link.classList.toggle('active', isActive);
+        if (isActive) {
+            link.setAttribute('aria-current', 'page');
+        } else {
+            link.removeAttribute('aria-current');
+        }
+    });
+
+    if (activeView === 'hero') playHeroSequence();
+    window.scrollTo(0, 0);
+}
+
+if (pageViews.length > 0) {
+    window.addEventListener('hashchange', renderPageView);
+    renderPageView();
+}
 
 // Set current year
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -69,31 +232,9 @@ function handleFormSubmit(e) {
     e.target.reset();
 }
 
-// Highlight active nav item on scroll
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('.nav-item');
-    
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navItems.forEach(item => {
-        item.classList.remove('active');
-        if (item.getAttribute('href') === `#${current}`) {
-            item.classList.add('active');
-        }
-    });
-});
-
 /* ============================================================
-   ADVANCED CYBER CURSOR & INTERACTIVE ENERGY CANVAS
-   Hệ thống con trỏ công nghệ cao, vệt sáng laser và tương tác hạt
+   CYBER CURSOR & INTERACTIVE PARTICLE CANVAS
+   Hiệu ứng mạng hạt cơ khí tương tác chuột
    ============================================================ */
 
 // 1. Futuristic Cyber Cursor with Smooth LERP
@@ -125,11 +266,6 @@ window.addEventListener('mousemove', (e) => {
     document.documentElement.style.setProperty('--mouse-x', `${mouseX}px`);
     document.documentElement.style.setProperty('--mouse-y', `${mouseY}px`);
 
-    // Tăng mật độ hạt năng lượng khi di chuột (2-3 hạt đa sắc mỗi chuyển động)
-    const spawnCount = Math.floor(Math.random() * 2) + 2;
-    for (let i = 0; i < spawnCount; i++) {
-        sparks.push(new EnergySpark(mouseX, mouseY));
-    }
 });
 
 // Cursor hover locks on interactive elements
@@ -150,13 +286,6 @@ initCursorInteractions();
 
 window.addEventListener('mousedown', () => {
     if (cursorRing) cursorRing.classList.add('clicking');
-    // Spawn click shockwave
-    if (mouseX > 0 && mouseY > 0) {
-        shockwaves.push(new Shockwave(mouseX, mouseY));
-        for (let i = 0; i < 12; i++) {
-            sparks.push(new EnergySpark(mouseX, mouseY, true));
-        }
-    }
 });
 
 window.addEventListener('mouseup', () => {
@@ -171,246 +300,216 @@ window.addEventListener('mouseleave', () => {
     document.documentElement.style.setProperty('--mouse-y', `50%`);
 });
 
-// 2. Interactive Energy Canvas & Circuit Nodes
+// 2. Circuit connections with miniature mechanical gears
 const canvas = document.getElementById('techCanvas');
-let sparks = [];
-let shockwaves = [];
 
 if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    const ctx = canvas.getContext('2d', { alpha: true });
+    let width = 0;
+    let height = 0;
+    let canvasLeft = 0;
+    let canvasTop = 0;
+    let pixelRatio = 1;
+    let gears = [];
+    let animationFrame = 0;
+    let previousFrameTime = 0;
 
-    window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        initNodes();
-    });
-
-    // Photon Energy Spark (Vệt sáng laser phóng ra khi di chuột)
-    class EnergySpark {
-        constructor(x, y, isExplosion = false) {
-            this.x = x + (Math.random() - 0.5) * 6;
-            this.y = y + (Math.random() - 0.5) * 6;
-            const speed = isExplosion ? (Math.random() * 4.5 + 2) : (Math.random() * 2.2 + 0.6);
-            const angle = Math.random() * Math.PI * 2;
-            this.vx = Math.cos(angle) * speed;
-            this.vy = Math.sin(angle) * speed;
-            this.size = Math.random() * 3.2 + 1.2;
-            this.baseSize = this.size;
-            this.life = 1;
-            this.decay = Math.random() * 0.024 + 0.015; // Giữ hạt lâu hơn tạo vệt sáng huyền ảo
-            this.wobble = Math.random() * Math.PI;
-            this.wobbleSpeed = Math.random() * 0.12 + 0.06;
-
-            // Bảng màu cyber neon đa sắc: Mint, Emerald, Cyan, Turquoise
-            const colors = [
-                '0, 245, 155',   // Cyber Mint
-                '16, 185, 129',  // Emerald Green
-                '56, 189, 248',  // Electric Cyan
-                '52, 211, 153'   // Soft Jade
-            ];
-            this.color = colors[Math.floor(Math.random() * colors.length)];
-        }
-
-        update() {
-            this.wobble += this.wobbleSpeed;
-            this.x += this.vx + Math.sin(this.wobble) * 0.45;
-            this.y += this.vy + Math.cos(this.wobble) * 0.45;
-            this.vx *= 0.95;
-            this.vy *= 0.95;
-            this.life -= this.decay;
-            this.size = this.baseSize * this.life;
-        }
-
-        draw(ctx) {
-            if (this.life <= 0) return;
-            ctx.save();
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, Math.max(this.size, 0.4), 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${this.color}, ${this.life * 0.85})`;
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = `rgba(${this.color}, ${this.life * 0.9})`;
-            ctx.fill();
-            ctx.restore();
-        }
+    function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        width = Math.max(rect.width, 1);
+        height = Math.max(rect.height, 1);
+        canvasLeft = rect.left;
+        canvasTop = rect.top;
+        pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(width * pixelRatio);
+        canvas.height = Math.round(height * pixelRatio);
+        ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        initGears();
     }
 
-    // Shockwave EMP Ripple on Click
-    class Shockwave {
-        constructor(x, y) {
-            this.x = x;
-            this.y = y;
-            this.radius = 5;
-            this.maxRadius = 150;
-            this.life = 1;
-        }
+    window.addEventListener('resize', resizeCanvas);
 
-        update() {
-            this.radius += 5.5;
-            this.life = 1 - (this.radius / this.maxRadius);
-        }
-
-        draw(ctx) {
-            if (this.life <= 0) return;
-            ctx.save();
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(52, 211, 153, ${this.life * 0.7})`;
-            ctx.lineWidth = Math.max(2.5 * this.life, 0.5);
-            ctx.shadowBlur = 12;
-            ctx.shadowColor = '#10b981';
-            ctx.stroke();
-            ctx.restore();
-        }
-    }
-
-    // Circuit Energy Node (Không ô vuông - thuần điểm sáng tròn vi mạch)
-    class CircuitNode {
+    class CircuitGear {
         constructor() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
             this.vx = (Math.random() - 0.5) * 0.6;
             this.vy = (Math.random() - 0.5) * 0.6;
-            this.radius = Math.random() * 2.2 + 1.2;
-            this.baseRadius = this.radius;
+            this.radius = Math.random() + 4.5;
+            this.teeth = Math.floor(Math.random() * 3) + 6;
+            this.rotation = Math.random() * Math.PI * 2;
+            this.angularVelocity = (Math.random() - 0.5) * 0.018;
             this.pulse = Math.random() * Math.PI * 2;
         }
 
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            this.pulse += 0.04;
+        update(frameScale, pointerX, pointerY, pointerActive) {
+            this.x += this.vx * frameScale;
+            this.y += this.vy * frameScale;
+            this.rotation += this.angularVelocity * frameScale;
+            this.pulse += 0.04 * frameScale;
 
             if (this.x < 0 || this.x > width) this.vx *= -1;
             if (this.y < 0 || this.y > height) this.vy *= -1;
 
-            // Tương tác từ trường khi chuột tới gần
-            if (isMouseActive && mouseX > 0 && mouseY > 0) {
-                const dx = mouseX - this.x;
-                const dy = mouseY - this.y;
-                const dist = Math.hypot(dx, dy);
-                const mouseRadius = 180;
+            if (pointerActive) {
+                const dx = pointerX - this.x;
+                const dy = pointerY - this.y;
+                const distance = Math.hypot(dx, dy);
+                const interactionRadius = 180;
 
-                if (dist < mouseRadius) {
-                    const force = (mouseRadius - dist) / mouseRadius;
-                    const angle = Math.atan2(dy, dx);
-                    // Đẩy nhẹ tạo cảm giác từ trường cơ điện tử
-                    this.x -= Math.cos(angle) * force * 1.8;
-                    this.y -= Math.sin(angle) * force * 1.8;
+                if (distance > 0 && distance < interactionRadius) {
+                    const force = (interactionRadius - distance) / interactionRadius;
+                    this.x -= (dx / distance) * force * 1.8 * frameScale;
+                    this.y -= (dy / distance) * force * 1.8 * frameScale;
                 }
             }
         }
 
-        draw() {
-            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-            const nodeColor = isLight ? '5, 150, 105' : '52, 211, 153';
-            const currentRadius = this.baseRadius + Math.sin(this.pulse) * 0.6;
+        draw(isLight) {
+            const accent = isLight ? '5, 150, 105' : '0, 255, 136';
+            const rootRadius = this.radius * 0.7;
+            const toothAngle = (Math.PI * 2) / this.teeth;
+            const pulse = (Math.sin(this.pulse) + 1) / 2;
+            const pulseScale = 0.92 + pulse * 0.14;
+            const brightness = 0.2 + pulse * 0.15;
+
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.rotation);
+            ctx.scale(pulseScale, pulseScale);
+            ctx.globalAlpha = brightness;
+            ctx.beginPath();
+            for (let tooth = 0; tooth < this.teeth; tooth++) {
+                const startAngle = tooth * toothAngle;
+                const points = [
+                    [0.08, rootRadius],
+                    [0.2, this.radius],
+                    [0.58, this.radius],
+                    [0.7, rootRadius],
+                    [0.92, rootRadius]
+                ];
+
+                points.forEach(([offset, radius], index) => {
+                    const angle = startAngle + offset * toothAngle;
+                    const x = Math.cos(angle) * radius;
+                    const y = Math.sin(angle) * radius;
+                    if (tooth === 0 && index === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                });
+            }
+            ctx.closePath();
+            ctx.fillStyle = `rgba(${accent}, 0.1)`;
+            ctx.strokeStyle = `rgba(${accent}, 0.68)`;
+            ctx.lineWidth = 0.7;
+            ctx.shadowColor = `rgba(${accent}, 0.45)`;
+            ctx.shadowBlur = 0.5 + pulse * 0.7;
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.shadowBlur = 0;
+            ctx.lineWidth = 0.65;
+            ctx.strokeStyle = `rgba(${accent}, 0.56)`;
+            ctx.beginPath();
+            ctx.arc(0, 0, this.radius * 0.36, 0, Math.PI * 2);
+            ctx.stroke();
 
             ctx.beginPath();
-            ctx.arc(this.x, this.y, Math.max(currentRadius, 1), 0, Math.PI * 2);
-            ctx.fillStyle = `rgb(${nodeColor})`;
+            ctx.arc(0, 0, Math.max(this.radius * 0.16, 0.55), 0, Math.PI * 2);
+            ctx.fillStyle = isLight ? 'rgba(241, 248, 244, 0.9)' : 'rgba(6, 13, 9, 0.9)';
             ctx.fill();
+            ctx.strokeStyle = `rgba(${accent}, 0.65)`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+            ctx.restore();
         }
     }
 
-    let nodes = [];
-    function initNodes() {
-        nodes = [];
-        const count = Math.floor((width * height) / 13000);
-        const total = Math.min(Math.max(count, 45), 90);
-        for (let i = 0; i < total; i++) {
-            nodes.push(new CircuitNode());
-        }
+    function initGears() {
+        const count = Math.floor((width * height) / 22000);
+        const total = Math.min(Math.max(count, 24), 55);
+        gears = Array.from({ length: total }, () => new CircuitGear());
     }
 
-    function renderConnections() {
-        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-        const strokeColor = isLight ? '5, 150, 105' : '16, 185, 129';
-        const connectDist = 120;
-        const mouseRadius = 180;
+    function renderFrame(timestamp) {
+        if (document.hidden) return;
 
-        for (let a = 0; a < nodes.length; a++) {
-            for (let b = a + 1; b < nodes.length; b++) {
-                const dx = nodes[a].x - nodes[b].x;
-                const dy = nodes[a].y - nodes[b].y;
-                const dist = Math.hypot(dx, dy);
-
-                if (dist < connectDist) {
-                    const alpha = (1 - dist / connectDist) * 0.2;
-                    ctx.strokeStyle = `rgba(${strokeColor}, ${alpha})`;
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(nodes[a].x, nodes[a].y);
-                    ctx.lineTo(nodes[b].x, nodes[b].y);
-                    ctx.stroke();
-                }
-            }
-
-            // Tia năng lượng kết nối với con trỏ chuột
-            if (isMouseActive && mouseX > 0 && mouseY > 0) {
-                const dx = mouseX - nodes[a].x;
-                const dy = mouseY - nodes[a].y;
-                const dist = Math.hypot(dx, dy);
-
-                if (dist < mouseRadius) {
-                    const alpha = (1 - dist / mouseRadius) * 0.45;
-                    ctx.strokeStyle = isLight 
-                        ? `rgba(5, 150, 105, ${alpha})`
-                        : `rgba(52, 211, 153, ${alpha})`;
-                    ctx.lineWidth = 1.2;
-                    ctx.beginPath();
-                    ctx.moveTo(nodes[a].x, nodes[a].y);
-                    ctx.lineTo(mouseX, mouseY);
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-
-    // Main 60 FPS Loop
-    function animate() {
+        const deltaSeconds = previousFrameTime
+            ? Math.min((timestamp - previousFrameTime) / 1000, 0.05)
+            : 1 / 60;
+        const frameScale = deltaSeconds * 60;
+        previousFrameTime = timestamp;
         ctx.clearRect(0, 0, width, height);
 
-        // Smooth LERP cursor ring tracking
-        if (cursorRing && isMouseActive && mouseX > 0) {
+        const pointerX = mouseX - canvasLeft;
+        const pointerY = mouseY - canvasTop;
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const strokeColor = isLight ? '5, 150, 105' : '16, 185, 129';
+        const connectDistance = 120;
+        const mouseRadius = 180;
+
+        if (cursorRing && isMouseActive) {
             ringX += (mouseX - ringX) * 0.18;
             ringY += (mouseY - ringY) * 0.18;
             cursorRing.style.left = `${ringX}px`;
             cursorRing.style.top = `${ringY}px`;
         }
 
-        // Draw and update circuit nodes
-        for (let i = 0; i < nodes.length; i++) {
-            nodes[i].update();
-            nodes[i].draw();
+        for (const gear of gears) {
+            gear.update(frameScale, pointerX, pointerY, isMouseActive);
         }
 
-        renderConnections();
+        for (let first = 0; first < gears.length; first++) {
+            const gear = gears[first];
+            for (let second = first + 1; second < gears.length; second++) {
+                const other = gears[second];
+                const distance = Math.hypot(gear.x - other.x, gear.y - other.y);
 
-        // Update & draw shockwaves
-        for (let i = shockwaves.length - 1; i >= 0; i--) {
-            shockwaves[i].update();
-            shockwaves[i].draw(ctx);
-            if (shockwaves[i].life <= 0) {
-                shockwaves.splice(i, 1);
+                if (distance < connectDistance) {
+                    const alpha = (1 - distance / connectDistance) * 0.1;
+                    ctx.strokeStyle = `rgba(${strokeColor}, ${alpha})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(gear.x, gear.y);
+                    ctx.lineTo(other.x, other.y);
+                    ctx.stroke();
+                }
+            }
+
+            if (isMouseActive && mouseX > 0 && mouseY > 0) {
+                const distance = Math.hypot(pointerX - gear.x, pointerY - gear.y);
+                if (distance < mouseRadius) {
+                    const alpha = (1 - distance / mouseRadius) * 0.25;
+                    ctx.strokeStyle = isLight
+                        ? `rgba(5, 150, 105, ${alpha})`
+                        : `rgba(52, 211, 153, ${alpha})`;
+                    ctx.lineWidth = 1.2;
+                    ctx.beginPath();
+                    ctx.moveTo(gear.x, gear.y);
+                    ctx.lineTo(pointerX, pointerY);
+                    ctx.stroke();
+                }
             }
         }
 
-        // Update & draw energy sparks
-        for (let i = sparks.length - 1; i >= 0; i--) {
-            sparks[i].update();
-            sparks[i].draw(ctx);
-            if (sparks[i].life <= 0) {
-                sparks.splice(i, 1);
-            }
+        for (const gear of gears) {
+            gear.draw(isLight);
         }
 
-        requestAnimationFrame(animate);
+        animationFrame = window.requestAnimationFrame(renderFrame);
     }
 
-    initNodes();
-    animate();
+    resizeCanvas();
+    animationFrame = window.requestAnimationFrame(renderFrame);
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            window.cancelAnimationFrame(animationFrame);
+            previousFrameTime = 0;
+            return;
+        }
+        previousFrameTime = 0;
+        animationFrame = window.requestAnimationFrame(renderFrame);
+    });
 }
 
 // 3. 3D Tilt Effect on Cards for Realistic Physical Touch
